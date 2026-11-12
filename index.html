@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GR Systems | Soporte Técnico</title>
+    <!-- Ícono para la pestaña del navegador -->
+    <link rel="icon" type="image/jpeg" href="img/logo-icono.jpg.jpeg">
+    <style>
+        :root {
+            --azul-bg: #0b132b;
+            --azul-tarjeta: #1c2541;
+            --azul-principal: #3a86ff;
+            --azul-hover: #2563eb;
+            --whatsapp-verde: #25D366;
+            --whatsapp-hover: #1ebe5d;
+            --blanco: #ffffff;
+            --texto-gris: #94a3b8;
+            --borde-color: #334155;
+            --verde-precio: #4ade80;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--azul-bg);
+            color: var(--blanco);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+      
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animar-entrada {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        header {
+            background-color: var(--azul-tarjeta);
+            border-bottom: 1px solid var(--borde-color);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: fadeInDown 0.5s ease-out;
+        }
+
+        .logo-img {
+            max-height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Hero / Portada con imagen de fondo */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            background: linear-gradient(rgba(11, 19, 43, 0.85), rgba(11, 19, 43, 0.92)), url('img/logo-completo.jpg.jpeg');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid var(--borde-color);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(58, 134, 255, 0.2);
+            color: var(--azul-principal);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(58, 134, 255, 0.4);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--blanco);
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero h1 span {
+            color: var(--azul-principal);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--texto-gris);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            margin-bottom: 50px;
+            background: var(--azul-tarjeta);
+            border: 1px solid var(--borde-color);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(58, 134, 255, 0.1);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--blanco);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--borde-color);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        details {
+            background: #131b2e;
+            border: 1px solid var(--borde-color);
+            border-radius: 8px;
+            margin-bottom: 14px;
+            padding: 16px 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        details:hover {
+            border-color: rgba(58, 134, 255, 0.5);
+        }
+
+        details[open] {
+            border-color: var(--azul-principal);
+            box-shadow: 0 4px 20px rgba(58, 134, 255, 0.2);
+            background: #162038;
+        }
+
+        summary {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            gap: 15px;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--azul-principal);
+            font-weight: bold;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        details[open] summary::after {
+            content: '−';
+            transform: rotate(180deg);
+        }
+
+        .summary-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .summary-main {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--blanco);
+        }
+
+        .summary-preview {
+            font-size: 0.9rem;
+            color: var(--texto-gris);
+            font-weight: 400;
+        }
+
+        .details-content {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--borde-color);
+            color: var(--texto-gris);
+            font-size: 0.96rem;
+            animation: fadeInDown 0.4s ease-out;
+        }
+
+        .price-tag {
+            display: inline-block;
+            background-color: rgba(74, 222, 128, 0.15);
+            color: var(--verde-precio);
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .license-note {
+            font-size: 0.88rem;
+            color: #34d399;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .mant-sublist {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 12px 0;
+        }
+
+        .mant-sublist li {
+            font-size: 0.92rem;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .mant-sublist li::before {
+            content: '▪';
+            color: var(--azul-principal);
+            position: absolute;
+            left: 0;
+        }
+
+        .btn-whatsapp-item {
+            display: inline-block;
+            margin-top: 12px;
+            background-color: var(--whatsapp-verde);
+            color: #062b16;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-whatsapp-item:hover {
+            background-color: var(--whatsapp-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .office-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .office-item {
+            background: #131b2e;
+            border: 1px solid var(--borde-color);
+            padding: 16px 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .office-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--azul-principal);
+        }
+
+        .office-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .office-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--blanco);
+        }
+
+        .office-price {
+            background: rgba(74, 222, 128, 0.15);
+            color: var(--verde-precio);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .btn-office-wa {
+            display: block;
+            text-align: center;
+            background-color: var(--whatsapp-verde);
+            color: #062b16;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-office-wa:hover {
+            background-color: var(--whatsapp-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .consulta-box {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--borde-color);
+            font-weight: 600;
+            color: var(--blanco);
+        }
+
+        .btn-consulta-wa {
+            display: inline-block;
+            margin-top: 12px;
+            background-color: var(--azul-principal);
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 11px 24px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-consulta-wa:hover {
+            background-color: var(--azul-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(58, 134, 255, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #070d1d;
+            color: var(--texto-gris);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            border-top: 1px solid var(--borde-color);
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            section { padding: 20px; }
+        }
+    </style>
+</head>
+<body class="animar-entrada">
+
+    <header>
+        <div class="logo">
+            <img src="img/logo-completo.jpg.jpeg" alt="GR Systems Logo" class="logo-img">
+        </div>
+    </header>
+
+    <div class="hero">
+        <span class="badge">Soporte Técnico Profesional</span>
+        <h1>Soluciones Tecnológicas en <span>GR Systems</span></h1>
+        <p>Instalación de sistemas operativos, paquetería de oficina y mantenimiento especializado para alargar la vida útil de tu equipo.</p>
+    </div>
+
+    <div class="container">
+
+        <section>
+            <h2>💻 Instalación de Sistemas Operativos Windows</h2>
+            
+            <details>
+                <summary>
+                    <span class="summary-main">Windows 7</span>
+                </summary>
+                <div class="details-content">
+                    <p>Sistema operativo clásico, altamente compatible con equipos antiguos o software específico de generaciones pasadas.</p>
+                    <div class="license-note">✔ Incluye licencia digital activada</div>
+                    <div class="action-row">
+                        <span class="price-tag">Precio del servicio: Q150</span>
+                        <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20tu%20servicio%20de%20instalaci%C3%B3n%20de%20sistema%20en%20Windows%207." target="_blank" class="btn-whatsapp-item">Solicitar por WhatsApp</a>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="summary-main">Windows 8 / 8.1</span>
+                </summary>
+                <div class="details-content">
+                    <p>Interfaz dinámica y optimizada para ofrecer un rendimiento fluido en equipos de gama de entrada o medianos.</p>
+                    <div class="license-note">✔ Incluye licencia digital activada</div>
+                    <div class="action-row">
+                        <span class="price-tag">Precio del servicio: Q150</span>
+                        <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20tu%20servicio%20de%20instalaci%C3%B3n%20de%20sistema%20en%20Windows%208." target="_blank" class="btn-whatsapp-item">Solicitar por WhatsApp</a>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="summary-main">Windows 10</span>
+                </summary>
+                <div class="details-content">
+                    <p>El sistema operativo más estable, seguro y con total compatibilidad para la gran mayoría de programas actuales.</p>
+                    <div class="license-note">✔ Incluye licencia digital activada</div>
+                    <div class="action-row">
+                        <span class="price-tag">Precio del servicio: Q200</span>
+                        <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20tu%20servicio%20de%20instalaci%C3%B3n%20de%20sistema%20en%20Windows%2010." target="_blank" class="btn-whatsapp-item">Solicitar por WhatsApp</a>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="summary-main">Windows 11</span>
+                </summary>
+                <div class="details-content">
+                    <p>La evolución más moderna, con diseño minimalista renovado y alto rendimiento optimizado para hardware actual.</p>
+                    <div class="license-note">✔ Incluye licencia digital activada</div>
+                    <div class="action-row">
+                        <span class="price-tag">Precio del servicio: Q200</span>
+                        <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20tu%20servicio%20de%20instalaci%C3%B3n%20de%20sistema%20en%20Windows%2011." target="_blank" class="btn-whatsapp-item">Solicitar por WhatsApp</a>
+                    </div>
+                </div>
+            </details>
+
+            <div class="consulta-box">
+                <p>¿Cualquier duda o consulta? Pregúntanos con toda confianza.</p>
+                <a href="https://wa.me/50244977073?text=Hola%2C%20tengo%20una%20consulta%20sobre%20la%20instalaci%C3%B3n%20de%20Windows." target="_blank" class="btn-consulta-wa">Preguntar por WhatsApp</a>
+            </div>
+        </section>
+
+        <!-- 2. OFFICE -->
+        <section>
+            <h2>📊 Instalación de Microsoft Office</h2>
+            <p style="color: var(--texto-gris); margin-bottom: 20px; font-size: 0.95rem;">Equipa tu ordenador con las mejores herramientas de productividad para documentos, hojas de cálculo y presentaciones, con su licencia cada una claramente.</p>
+            
+            <div class="office-grid">
+                <div class="office-item">
+                    <div class="office-top">
+                        <span class="office-name">Office 365</span>
+                        <span class="office-price">Q250</span>
+                    </div>
+                    <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20tu%20servicio%20de%20instalaci%C3%B3n%20de%20Office%20365." target="_blank" class="btn-office-wa">Solicitar por WhatsApp</a>
+                </div>
+
+                <div class="office-item">
+                    <div class="office-top">
+                        <span class="office-name">Office 2024</span>
+                        <span class="office-price">Q200</span>
+                    </div>
+                    <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20tu%20servicio%20de%20instalaci%C3%B3n%20de%20Office%202024." target="_blank" class="btn-office-wa">Solicitar por WhatsApp</a>
+                </div>
+
+                <div class="office-item">
+                    <div class="office-top">
+                        <span class="office-name">Office 2021</span>
+                        <span class="office-price">Q200</span>
+                    </div>
+                    <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20tu%20servicio%20de%20instalaci%C3%B3n%20de%20Office%202021." target="_blank" class="btn-office-wa">Solicitar por WhatsApp</a>
+                </div>
+
+                <div class="office-item">
+                    <div class="office-top">
+                        <span class="office-name">Office 2019</span>
+                        <span class="office-price">Q150</span>
+                    </div>
+                    <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20tu%20servicio%20de%20instalaci%C3%B3n%20de%20Office%202019." target="_blank" class="btn-office-wa">Solicitar por WhatsApp</a>
+                </div>
+
+                <div class="office-item">
+                    <div class="office-top">
+                        <span class="office-name">Office 2016</span>
+                        <span class="office-price">Q150</span>
+                    </div>
+                    <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20tu%20servicio%20de%20instalaci%C3%B3n%20de%20Office%202016." target="_blank" class="btn-office-wa">Solicitar por WhatsApp</a>
+                </div>
+
+                <div class="office-item">
+                    <div class="office-top">
+                        <span class="office-name">Office 2014</span>
+                        <span class="office-price">Q150</span>
+                    </div>
+                    <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20tu%20servicio%20de%20instalaci%C3%B3n%20de%20Office%202014." target="_blank" class="btn-office-wa">Solicitar por WhatsApp</a>
+                </div>
+
+                <div class="office-item">
+                    <div class="office-top">
+                        <span class="office-name">Office 2010</span>
+                        <span class="office-price">Q150</span>
+                    </div>
+                    <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20tu%20servicio%20de%20instalaci%C3%B3n%20de%20Office%202010." target="_blank" class="btn-office-wa">Solicitar por WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="consulta-box">
+                <p>¿Cualquier duda o consulta? Pregúntanos con toda confianza.</p>
+                <a href="https://wa.me/50244977073?text=Hola%2C%20tengo%20una%20consulta%20sobre%20la%20instalaci%C3%B3n%20de%20Microsoft%20Office." target="_blank" class="btn-consulta-wa">Preguntar por WhatsApp</a>
+            </div>
+        </section>
+
+        <!-- 3. MANTENIMIENTOS -->
+        <section>
+            <h2>🛠️ Mantenimientos de Computadora</h2>
+            <p style="color: var(--texto-gris); margin-bottom: 20px; font-size: 0.95rem;">Selecciona un tipo de mantenimiento para conocer todos los detalles, alcance del servicio y tarifas estimadas. <em>(Nota: Los repuestos o piezas físicas requeridas se cotizan por separado).</em></p>
+
+            <details>
+                <summary>
+                    <div class="summary-title-group">
+                        <span class="summary-main">1. Mantenimiento Preventivo</span>
+                        <span class="summary-preview">Limpieza profunda y optimización periódica para evitar sobrecalentamiento y lentitud.</span>
+                    </div>
+                </summary>
+                <div class="details-content">
+                    <p>Se realiza de forma periódica antes de que ocurra una falla para alargar la vida útil del equipo, mantener temperaturas bajas y asegurar un rendimiento fluido.</p>
+                    <ul class="mant-sublist">
+                        <li><strong>Limpieza física interna y externa:</strong> Retiro completo de polvo en ventiladores, disipadores y placa base con aire comprimido y brochas antiestáticas.</li>
+                        <li><strong>Renovación térmica:</strong> Limpieza de contactos con alcohol isopropílico y aplicación de pasta térmica nueva en el procesador.</li>
+                        <li><strong>Optimización de software:</strong> Liberación de espacio en disco, limpieza de archivos temporales, desactivación de programas innecesarios al inicio y análisis antivirus de rutina.</li>
+                    </ul>
+                    <div class="action-row">
+                        <span class="price-tag">Precio: Q250</span>
+                        <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20el%20servicio%20de%20Mantenimiento%20Preventivo." target="_blank" class="btn-whatsapp-item">Solicitar por WhatsApp</a>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <div class="summary-title-group">
+                        <span class="summary-main">2. Mantenimiento Correctivo</span>
+                        <span class="summary-preview">Solución directa a fallas críticas, errores de sistema o reemplazo de piezas dañadas.</span>
+                    </div>
+                </summary>
+                <div class="details-content">
+                    <p>Se aplica cuando la computadora ya presenta un fallo operativo, pantalla azul, infecciones severas o daño físico y necesita volver a funcionar con normalidad.</p>
+                    <ul class="mant-sublist">
+                        <li><strong>Reparación de sistema:</strong> Formateo, reinstalación limpia de Windows, eliminación profunda de virus y reparación de archivos corruptos del sistema.</li>
+                        <li><strong>Intervención de hardware:</strong> Revisión de voltajes en fuente de poder y sustitución directa de componentes dañados (memoria RAM, discos SSD/HDD, ventiladores, etc.).</li>
+                        <li><strong>Nota sobre repuestos:</strong> El costo cubre únicamente la mano de obra; cualquier pieza física nueva se cotiza aparte según la necesidad del equipo.</li>
+                    </ul>
+                    <div class="action-row">
+                        <span class="price-tag">Precio: Q250 (más el costo de repuestos si aplica)</span>
+                        <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contrtar%20el%20servicio%20de%20Mantenimiento%20Correctivo." target="_blank" class="btn-whatsapp-item">Solicitar por WhatsApp</a>
+                    </div>
+                </div>
+            </details>
+            
+            <details>
+                <summary>
+                    <div class="summary-title-group">
+                        <span class="summary-main">3. Mantenimiento Predictivo (Diagnóstico)</span>
+                        <span class="summary-preview">Evaluación técnica completa para detectar desgastes antes de que el equipo falle.</span>
+                    </div>
+                </summary>
+                <div class="details-content">
+                    <p>Consiste en monitorear el estado real de los componentes internos mediante pruebas especializadas para anticiparse a fallos graves y pérdida de información.</p>
+                    <ul class="mant-sublist">
+                        <li><strong>Diagnóstico de almacenamiento:</strong> Revisión de porcentaje de vida útil, sectores dañados y temperatura de discos SSD y HDD.</li>
+                        <li><strong>Pruebas de estrés y memoria:</strong> Monitoreo térmico de procesador y tarjeta gráfica, además de escaneo de errores ocultos en la memoria RAM.</li>
+                        <li><strong>Presupuesto transparente:</strong> Entrega de informe detallado con las recomendaciones y costos exactos de reparación.</li>
+                    </ul>
+                    <div class="action-row">
+                        <span class="price-tag">Precio: Q100 (gratis al realizar la reparación con nosotros)</span>
+                        <a href="https://wa.me/50244977073?text=Hola%2C%20estoy%20interesad%40%20en%20contratar%20el%20servicio%20de%20Mantenimiento%20Predictivo%20(Diagn%C3%B3stico)." target="_blank" class="btn-whatsapp-item">Solicitar por WhatsApp</a>
+                    </div>
+                </div>
+            </details>
+
+            <div class="consulta-box">
+                <p>¿Cualquier duda o consulta? Pregúntanos con toda confianza.</p>
+                <a href="https://wa.me/50244977073?text=Hola%2C%20tengo%20una%20consulta%20sobre%20los%20servicios%20de%20mantenimiento%20de%20computadora." target="_blank" class="btn-consulta-wa">Preguntar por WhatsApp</a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        &copy; 2026 GR Systems. Todos los derechos reservados.
+    </footer>
+
+</body>
+</html>
